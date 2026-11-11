@@ -214,12 +214,16 @@ body {
   var yes = $('yes'), no = $('no'), note = $('note');
   var ask = $('ask'), done = $('done'), fx = $('fx');
 
-  // Where the No button goes on its first two clicks, then behind Yes (percent of the arena).
-  var hops = [[80, 14], [20, 88]];
+  // Where the No button goes on its first six clicks, then behind Yes (percent of the arena).
+  var hops = [[80, 14], [20, 88], [82, 84], [16, 14], [82, 50], [50, 90]];
   var behindYes = [33, 50];
   var notes = [
     'Please <span class="hands" aria-hidden="true">🙏</span>',
     'Pretty please, Riya <span class="hands" aria-hidden="true">🙏</span>',
+    'Think about it once more?',
+    'I will share my food with you <span class="hands" aria-hidden="true">🙏</span>',
+    'I am almost begging now',
+    'Last please, I promise <span class="hands" aria-hidden="true">🙏</span>',
     'No went to hide behind Yes.'
   ];
   var clicks = 0;
@@ -244,7 +248,7 @@ body {
       yes.classList.add('nudge');
       yes.focus({ preventScroll: true });
     }
-    yes.style.setProperty('--grow', (1 + clicks * 0.08).toFixed(2));
+    yes.style.setProperty('--grow', (1 + Math.min(clicks, 5) * 0.06).toFixed(2));
     say(notes[Math.min(clicks, notes.length) - 1]);
   });
 
